@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  jc-encadernados-app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/home/node/app
+      - /home/node/app/node_modules
+    environment:
+      - NODE_ENV=development
+    networks:
+      - jc-network
+
+  jc-encadernados-test:
+    build: .
+    volumes:
+      - .:/home/node/app
+      - /home/node/app/node_modules
+    command: npm test
+    networks:
+      - jc-network
+
+networks:
+  jc-network:
+    driver: bridge
